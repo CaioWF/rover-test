@@ -5,7 +5,7 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { InstructionsDto } from './dtos/instruction.dto';
 import { RoverService } from './rover.service';
 
@@ -15,6 +15,19 @@ export class RoverController {
   constructor(private readonly roverService: RoverService) { }
 
   @Post()
+  @ApiOperation({ summary: 'Post the rover instructions' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The rover instructions have been successfully received.',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: 'The rover instructions are not valid.',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'An error occurred while processing the rover instructions.',
+  })
   @ApiConsumes('multipart/form-data')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('file'))
