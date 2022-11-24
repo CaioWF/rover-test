@@ -1,0 +1,13 @@
+{
+  "plateauDimension": [5, 5],
+  "rovers": [
+    {
+      "initialPosition": [1, 2, "N"],
+      "instructions": ["L", "M", "L", "M", "L", "M", "L", "M", "M"]
+    },
+    {
+      "initialPosition": [3, 3, "E"],
+      "instructions": ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"]
+    }
+  ]
+}
